@@ -3,7 +3,7 @@ import { Account } from './Account'
 
 export const Header = () => {
     return (
-        <AppBar >
+        <AppBar position='relative'>
             <Toolbar sx={{
                 backgroundColor: 'primary.dark',
                 display: 'flex',

@@ -15,4 +15,26 @@ export const theme = createTheme({
             contrastText: '#2A496A', //Borders Separators
         },
     },
+    components: {
+        MuiTabs: {
+            styleOverrides: {
+                indicator: {
+                    backgroundColor: '#fff',
+                }
+            }
+        },
+        MuiTab: {
+            styleOverrides: {
+                root:{
+                    color: '#fff',
+                    '.MuiTabs-vertical &': {
+                        '.&Mui-selected': {
+                            color: '#fff',
+                            backgroundColor: '#fff'
+                        }
+                    }
+                }
+            }
+        }
+    }
 });
