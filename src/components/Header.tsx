@@ -3,13 +3,13 @@ import { Account } from './Account'
 
 export const Header = () => {
     return (
-        <AppBar position='relative'>
+        <AppBar position='relative' sx={{ height: '12vh'}}>
             <Toolbar sx={{
                 backgroundColor: 'primary.dark',
                 display: 'flex',
                 justifyContent: 'space-between',
-                padding: '1rem',
-                borderBottom: '8px solid #2A496A'
+                borderBottom: '8px solid #2A496A',
+                height: '12vh'
             }}>
                 <Typography variant='h3'>PROJECTS TIME MANAGER</Typography>
                 <Account name='Alexandre Cloutier-Lemay' />

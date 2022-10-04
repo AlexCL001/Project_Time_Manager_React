@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Box, Typography, Tab, Tabs, Button, IconButton } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { ProjectsInfoBar } from './ProjectsInfoBar';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -16,11 +17,10 @@ function TabPanel(props: TabPanelProps) {
             role="tabpanel"
             hidden={value !== index}
             id={`vertical-tabpanel-${index}`}
-            aria-labelledby={`vertical-tab-${index}`}
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 3 }}>
+                <Box>
                     <Typography>{children}</Typography>
                 </Box>
             )}
@@ -30,8 +30,7 @@ function TabPanel(props: TabPanelProps) {
 
 function a11yProps(index: number) {
     return {
-        id: `vertical-tab-${index}`,
-        'aria-controls': `vertical-tabpanel-${index}`,
+        id: `vertical-tab-${index}`
     };
 }
 
@@ -43,28 +42,27 @@ export const SideNav = () => {
     };
 
     return (
-        <Box sx={{ flexGrow: 1, display: 'flex', height: '88vh', zIndex: 1, bgcolor: 'primary.dark', color: 'primary.contrastText' }}>
+        <Box sx={{ flexGrow: 1, display: 'flex', height: '88vh', width: '100vw', zIndex: 1, bgcolor: 'primary.dark', color: 'primary.contrastText' }}>
             <Tabs
                 orientation="vertical"
-                variant="scrollable"
+                //variant="scrollable"
                 value={value}
                 onChange={handleChange}
                 textColor="inherit"
-                aria-label="Vertical tabs"
-                sx={{ borderRight: 1, bgcolor: 'primary.main', color: "primary.contrastText", borderColor: 'secondary.contrastText', width: 300, borderWidth: '8px' }}
+                sx={{ borderRight: 1, bgcolor: 'primary.main', color: "primary.contrastText", borderColor: 'secondary.contrastText', width: '15vw', borderWidth: '8px' }}
             >
-                <Tab label="Projects" {...a11yProps(0)} sx={{ color: 'primary.contrastText' }} />
-                <Tab label="New project" {...a11yProps(1)} sx={{ color: 'primary.contrastText' }} />
-                <Tab label="Archives" {...a11yProps(2)} sx={{ color: 'primary.contrastText' }} />
+                <Tab label="Projects" {...a11yProps(0)} sx={{ color: 'primary.contrastText', fontSize: "25px", mt: "30px" }} />
+                <Tab label="New project" {...a11yProps(1)} sx={{ color: 'primary.contrastText', fontSize: "25px", mt: "30px" }} />
+                <Tab label="Archives" {...a11yProps(2)} sx={{ color: 'primary.contrastText', fontSize: "25px", mt: "30px" }} />
                 <IconButton sx={{ left: '20px', bottom: '5px', width: '1px', color: 'primary.contrastText', position: 'absolute' }}>
                     <SettingsIcon fontSize='large' />
                 </IconButton>
             </Tabs>
             <TabPanel value={value} index={0}>
-                Item One
+                <ProjectsInfoBar />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                Item Two
+                Item two
             </TabPanel>
             <TabPanel value={value} index={2}>
                 Item Three
