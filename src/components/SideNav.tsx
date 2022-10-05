@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Typography, Tab, Tabs, Button, IconButton } from '@mui/material';
+import { Box, Typography, Tab, Tabs, IconButton } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { ProjectsInfoBar } from './ProjectsInfoBar';
 
@@ -54,6 +54,7 @@ export const SideNav = () => {
                 <Tab label="Projects" {...a11yProps(0)} sx={{ color: 'primary.contrastText', fontSize: "25px", mt: "30px" }} />
                 <Tab label="New project" {...a11yProps(1)} sx={{ color: 'primary.contrastText', fontSize: "25px", mt: "30px" }} />
                 <Tab label="Archives" {...a11yProps(2)} sx={{ color: 'primary.contrastText', fontSize: "25px", mt: "30px" }} />
+                <Tab label="Following" {...a11yProps(3)} sx={{ color: 'primary.contrastText', fontSize: "25px", mt: "30px" }} />
                 <IconButton sx={{ left: '20px', bottom: '5px', width: '1px', color: 'primary.contrastText', position: 'absolute' }}>
                     <SettingsIcon fontSize='large' />
                 </IconButton>
@@ -66,6 +67,9 @@ export const SideNav = () => {
             </TabPanel>
             <TabPanel value={value} index={2}>
                 Item Three
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+                Item four
             </TabPanel>
         </Box>
     );
