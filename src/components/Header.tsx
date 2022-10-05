@@ -1,4 +1,4 @@
-import { Box, Typography, AppBar, Toolbar } from '@mui/material';
+import { Typography, AppBar, Toolbar } from '@mui/material';
 import { Account } from './Account'
 
 export const Header = () => {

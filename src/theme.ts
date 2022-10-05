@@ -44,7 +44,6 @@ export const theme = createTheme({
                     fontSize: "22px",
                     padding: '5px 16px 5px 16px',
                     backgroundColor: '#002953',
-                    //border: '30px solid white'
                 },
                 head:  {
                     padding: '20px 16px 20px 16px',
@@ -59,55 +58,6 @@ export const theme = createTheme({
                 },
             }
         },
-        MuiTableRow: {
-            styleOverrides: {
-                root: {
-                    //marginTop: '30px',
-                    //width: "100%",
-                    //border: '30px solid white'
-                    
-                },
-                head: {
-                    //borderSpacing: '10px 0',
-                    //borderCollapse: 'collapse',
-                   // border: 0,
-                },
-            }
-        },
-        MuiTable: {
-            styleOverrides: {
-                root: {
-                    //borderSpacing: '0 30px',
-                    //borderCollapse: 'separate',
-                    //borderRadius: '20px',
-                    //border: '20px solid white',
-                },
-                stickyHeader: {
-                    //borderSpacing: '0 30px',
-                    //display: 'table-caption',
-                    //borderSpacing: '0 0px',
+    },
 
-                }
-            }
-        },
-        MuiTableBody: {
-            styleOverrides: {
-                root: {
-                    // display: 'table-row-group',
-                    // borderSpacing: '0 30px',
-                    // borderCollapse: 'separate',
-                }
-            }
-        },
-        MuiTableHead: {
-            styleOverrides: {
-                root: {
-                    //display: 'table-header-group',
-                    //borderCollapse: 'separate',
-                    //borderSpacing: '0 0px',
-                    //width: '100%'
-                }
-            }
-        }
-    }
 });

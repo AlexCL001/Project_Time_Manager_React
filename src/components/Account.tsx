@@ -1,5 +1,5 @@
 import { Avatar, Box, Typography } from '@mui/material';
-import Alex from '../img/alex.jpg'
+import Alex from '../img/alex.jpg';
 
 type AccountProps = {
     name: string

@@ -1,10 +1,10 @@
-import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, IconButton, Collapse, Box } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
+import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, IconButton, Collapse, Box, Typography, Button, CircularProgress } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
-import { type } from '@testing-library/user-event/dist/type';
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 
 export const ProjectsInfoBar = () => {
 
@@ -14,42 +14,75 @@ export const ProjectsInfoBar = () => {
         timeSpent: string,
         startingTime: string,
         sessionNumber: number,
+        description: string,
     ) {
-        return { status, projectName, timeSpent, startingTime, sessionNumber };
+        return { status, projectName, timeSpent, startingTime, sessionNumber, description };
     }
 
+    const columns: GridColDef[] = [
+        {
+            field: 'startingTime',
+            headerName: 'Starting time',
+            width: 180,
+        },
+        {
+            field: 'endingTime',
+            headerName: 'Ending time',
+            width: 180,
+        },
+        {
+            field: 'timeSpent',
+            headerName: 'Time spent',
+            width: 180,
+        },
+    ]
+
     const rows = [
-        createData("Paused", "Alex_React_Project", "00:03:12:49", "11:03 16/09/2022", 2),
-        createData("Playing", "Alex_React", "00:03:12:49", "11:03 16/09/2022", 32),
-        createData("Paused", "Alex", "00:03:12:49", "11:03 16/09/2022", 200),
-        createData("Paused", "Alex_Ract_Project", "00:03:12:49", "11:03 16/09/2022", 2),
-        createData("Playing", "Ale_React", "00:03:12:49", "11:03 16/09/2022", 32),
-        createData("Paused", "Alx", "00:03:12:49", "11:03 16/09/2022", 200),
-        createData("Paused", "Alex_React_Prject", "00:03:12:49", "11:03 16/09/2022", 2),
-        createData("Playing", "Alex_Reac", "00:03:12:49", "11:03 16/09/2022", 32),
-        createData("Paused", "lex", "00:03:12:49", "11:03 16/09/2022", 200),
-        createData("Paused", "Alexact_Project", "00:03:12:49", "11:03 16/09/2022", 2),
-        createData("Playing", "AlReact", "00:03:12:49", "11:03 16/09/2022", 32),
-        createData("Paused", "Al", "00:03:12:49", "11:03 16/09/2022", 200),
+        createData("Paused", "Alex_React_Project", "00:03:12:49", "11:03 16/09/2022", 2, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum consectetur porta elit sapien. Turpis lectus praesent sed purus."),
+        createData("Playing", "Alex_React", "00:03:12:49", "11:03 16/09/2022", 32, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum consectetur porta elit sapien. Turpis lectus praesent sed purus."),
+        createData("Paused", "Alex", "00:03:12:49", "11:03 16/09/2022", 200, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum consectetur porta elit sapien. Turpis lectus praesent sed purus."),
+        createData("Paused", "Alex_Ract_Project", "00:03:12:49", "11:03 16/09/2022", 2, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum consectetur porta elit sapien. Turpis lectus praesent sed purus."),
+        createData("Playing", "Ale_React", "00:03:12:49", "11:03 16/09/2022", 32, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum consectetur porta elit sapien. Turpis lectus praesent sed purus."),
+        createData("Paused", "Alx", "00:03:12:49", "11:03 16/09/2022", 200, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum consectetur porta elit sapien. Turpis lectus praesent sed purus."),
+        createData("Paused", "Alex_React_Prject", "00:03:12:49", "11:03 16/09/2022", 2, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum consectetur porta elit sapien. Turpis lectus praesent sed purus."),
+        createData("Playing", "Alex_Reac", "00:03:12:49", "11:03 16/09/2022", 32, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum consectetur porta elit sapien. Turpis lectus praesent sed purus."),
+        createData("Paused", "lex", "00:03:12:49", "11:03 16/09/2022", 200, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum consectetur porta elit sapien. Turpis lectus praesent sed purus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum consectetur porta elit sapien. Turpis lectus praesent sed purus."),
+        createData("Paused", "Alexact_Project", "00:03:12:49", "11:03 16/09/2022", 2, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum consectetur porta elit sapien. Turpis lectus praesent sed purus."),
+        createData("Playing", "AlReact", "00:03:12:49", "11:03 16/09/2022", 32, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum consectetur porta elit sapien. Turpis lectus praesent sed purus."),
+        createData("Paused", "Al", "00:03:12:49", "11:03 16/09/2022", 200, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum consectetur porta elit sapien. Turpis lectus praesent sed purus."),
+    ];
+
+    const rowss = [
+        { id: 0, startingTime: 22, endingTime: 212, timeSpent: 4223 },
+        { id: 1, startingTime: 432, endingTime: 216662, timeSpent: 6 },
+        { id: 2, startingTime: 6786, endingTime: 453, timeSpent: 877 },
+        { id: 3, startingTime: 22, endingTime: 212, timeSpent: 4223 },
     ];
 
     const [rowStates, setRowStates] = React.useState<{ open: boolean }[]>(rows.map(() => ({ open: false })));
-    const [play, setPlay] = React.useState(false);
+    const [playStates, setPlayStates] = React.useState<{ play: boolean }[]>(rows.map(() => ({ play: false })));
 
 
     const handleOpen = (index: number) => {
-
         const updateValue = rowStates;
         updateValue[index] = { open: !updateValue[index].open }
         setRowStates([...updateValue]);
-
     };
 
-    if (rowStates.length === 0) return null;
+    const handlePlay = (index: number) => {
+        const updateValue = playStates;
+        updateValue[index] = { play: !updateValue[index].play }
+        setPlayStates([...updateValue]);
+    };
+
+    if (rowStates.length === 0) {
+        return (
+            null
+        );
+    }
 
     return (
         <TableContainer sx={{ width: "84.5vw", height: '88vh' }}>
-            {/* mt: "30px", bgcolor: "primary.main", borderRadius: "25px", width: "99%" */}
             <Table stickyHeader sx={{}}>
                 <TableHead sx={{}}>
                     <TableRow sx={{ diplay: "flex", justifyContent: "space-evenly" }}>
@@ -65,13 +98,10 @@ export const ProjectsInfoBar = () => {
                 <TableBody sx={{}}>
                     {rows.map((row, index) => (
                         <>
-                            <TableRow
-                                key={row.projectName}
-                                sx={{}}
-                            >
+                            <TableRow key={row.projectName} sx={{}}>
                                 <TableCell align='center' >
-                                    <IconButton size="large" onClick={() => setPlay(!play)}>
-                                        {play ? <PauseIcon sx={{ color: "yellow", fontSize: "50px" }} /> : <PlayArrowIcon sx={{ color: "lightgreen", fontSize: "50px" }} />}
+                                    <IconButton size="large" onClick={() => handlePlay(index)}>
+                                        {playStates[index].play ? <PauseIcon sx={{ color: "yellow", fontSize: "50px" }} /> : <PlayArrowIcon sx={{ color: "lightgreen", fontSize: "50px" }} />}
                                     </IconButton>
                                 </TableCell>
                                 <TableCell align='center'>{row.status}</TableCell>
@@ -85,12 +115,51 @@ export const ProjectsInfoBar = () => {
                                     </IconButton>
                                 </TableCell>
                             </TableRow>
-                            <TableRow>
+                            <TableRow sx={{}}>
+                                <TableCell colSpan={7} sx={{ bgcolor: '#071a2e', padding: '0', width: '100%' }}>
                                     <Collapse in={rowStates[index].open} timeout="auto" unmountOnExit>
-                                        <Box>
-                                            Open drawer
+                                        <Box sx={{ width: '100%', bgcolor: "", pb: '10px' }}>
+                                            <Box sx={{ display: 'flex' }}>
+                                                <Typography sx={{ width: '40%', textAlign: 'center', padding: '10px', fontSize: '22px' }}>Session history</Typography>
+                                                <Typography sx={{ width: '30%', textAlign: 'center', padding: '10px', fontSize: '22px' }}>Description</Typography>
+                                                <Typography sx={{ width: '30%', textAlign: 'center', padding: '10px', fontSize: '22px' }}>Project name</Typography>
+                                            </Box>
+                                            <Box sx={{ display: 'flex' }}>
+                                                <Box sx={{ display: 'flex', width: '70%' }}>
+                                                    <Box sx={{ bgcolor: "secondary.light", width: '57.1%', textAlign: 'center', margin: '5px 15px 5px 15px' }}>
+                                                        {/* session histrory ici */}
+                                                        <DataGrid
+                                                            rows={rowss}
+                                                            columns={columns}
+                                                            pageSize={10}
+                                                            //rowsPerPageOptions={[2]}
+                                                            disableSelectionOnClick
+                                                            experimentalFeatures={{ newEditingApi: true }}
+                                                            sx={{ color: 'primary.contrastText'}}
+                                                        />
+                                                    </Box>
+                                                    <Box overflow='scroll' sx={{ display: 'flex', flexDirection: 'column', height: 250, bgcolor: "secondary.light", width: '42.9%', margin: '5px 15px 5px 15px', padding: '15px', border: '1px solid white' }}>
+                                                        {/* description ici */}
+                                                        {row.description}
+                                                    </Box>
+                                                </Box>
+                                                <Box sx={{ width: '30%' }}>
+                                                    <Box sx={{ width: '100%', height: '100%', display: ' flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                                                        <Box sx={{ bgcolor: "secondary.light", margin: '5px 15px 5px 15px', textAlign: '', borderRadiu5pxs: '2', height: 90, padding: '10px', border: '1px solid white', borderRadius: '4px' }}>
+                                                            {/* project name ici */}
+                                                            <Typography sx={{ fontSize: '20px' }}>{row.projectName}</Typography>
+                                                        </Box>
+                                                        <Box sx={{ display: 'flex', justifyContent: 'space-evenly', bgcolor: '' }}>
+                                                            {/* 2 boutton ici */}
+                                                            <Button sx={{ color: "primary.contrastText", fontSize: "20px", borderRadius: '20px', padding: '10px 20px 10px 20px', bgcolor: 'secondary.light', margin: '5px 15px 5px 15px' }}>Share</Button>
+                                                            <Button sx={{ color: "primary.contrastText", fontSize: "20px", borderRadius: '20px', padding: '10px 20px 10px 20px', bgcolor: 'red', margin: '5px 15px 5px 15px' }}>End project</Button>
+                                                        </Box>
+                                                    </Box>
+                                                </Box>
+                                            </Box>
                                         </Box>
                                     </Collapse>
+                                </TableCell>
                             </TableRow>
                         </>
                     ))}
