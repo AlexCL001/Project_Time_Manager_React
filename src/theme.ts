@@ -26,7 +26,7 @@ export const theme = createTheme({
         },
         MuiTab: {
             styleOverrides: {
-                root:{
+                root: {
                     color: '#fff',
                     '.MuiTabs-vertical &': {
                         '.&Mui-selected': {
@@ -45,7 +45,7 @@ export const theme = createTheme({
                     padding: '5px 16px 5px 16px',
                     backgroundColor: '#002953',
                 },
-                head:  {
+                head: {
                     padding: '20px 16px 20px 16px',
                     backgroundColor: '#0057AE',
                 }
@@ -58,6 +58,16 @@ export const theme = createTheme({
                 },
             }
         },
+        MuiButton: {
+            styleOverrides: {
+                contained: {
+                    '&:hover': {
+                        //backgroundColor: '#FF6262',
+                    },
+                }
+            }
+        },
+
     },
 
 });

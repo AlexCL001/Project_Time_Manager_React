@@ -1,6 +1,8 @@
 import { Typography, AppBar, Toolbar } from '@mui/material';
 import { Account } from './Account'
 
+const monNom = 'Alexandre Cloutier-Lemay';
+
 export const Header = () => {
     return (
         <AppBar position='relative' sx={{ height: '12vh'}}>
@@ -9,10 +11,10 @@ export const Header = () => {
                 display: 'flex',
                 justifyContent: 'space-between',
                 borderBottom: '8px solid #2A496A',
-                height: '12vh'
+                height: '12vh',
             }}>
                 <Typography variant='h3'>PROJECTS TIME MANAGER</Typography>
-                <Account name='Alexandre Cloutier-Lemay' />
+                <Account name={monNom} />
             </Toolbar>
         </AppBar>
     )

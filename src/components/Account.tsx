@@ -2,7 +2,7 @@ import { Avatar, Box, Typography } from '@mui/material';
 import Alex from '../img/alex.jpg';
 
 type AccountProps = {
-    name: string
+    name: string,
 }
 
 export const Account = (props: AccountProps) => {
